@@ -1,0 +1,15 @@
+div.images-hint{font-size:0.9em}
+div.images{
+	width:478px;
+	overflow:scroll;
+	overflow-y:hidden;
+	margin:0.5em 0 0 0;
+	border:1px solid #669;border-bottom:1px solid #ccd;border-right:1px solid #ccd;background-color:#f8f8ff;
+	filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr='#ffeeeeff',EndColorStr='#ffffffff');}
+div.images table{margin:0 1em 0 0;border-spacing:0;border-collapse:collapse;width:auto;}
+div.images table td.image{padding:0.5em 0 1em 1em;vertical-align:top}
+div.images td.image{padding:0 1em 0 0;}
+div.images td.image div.pos{font-size:0.9em}
+div.images td.image div.icon{width:auto;float:right;cursor:pointer}
+div.images td.image div.icon img{width:auto;border:none}
+div.images td.image img{border:1px solid #669;width:128px;}

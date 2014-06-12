@@ -1,0 +1,33 @@
+var CreditCalculator={};
+CreditCalculator.updateCredit=function(){
+	var p=document.formCalc.price.value;
+	p=p.replace(/\s+/g, "");
+	p=p.replace(/[,.].*/g, "");
+	var f=document.formCalc.firstPay.value;
+	f=f.replace(/\s/g, "");
+	f=f.replace(/[,.].*/g, "");
+	if(p.match(/\d+/)!=null&&f.match(/\d+/)!=null&&parseInt(p)>parseInt(f)){
+		var c=parseInt(p)-parseInt(f);
+		var s=c.toString();
+		s=s.replace(/(\d+)(\d{3})/,"$1 $2");
+		s=s.replace(/(\d+)(\d{3})/,"$1 $2");
+		s=s.replace(/(\d+)(\d{3})/,"$1 $2");
+		document.formCalc.credit.value=s;
+	}
+	else document.formCalc.credit.value="";
+}
+CreditCalculator.showOld=function(){
+	var styleDisplay="table-row";
+	if(document.all)styleDisplay="block";// for IE
+	get("tr1").style.display=styleDisplay;
+	get("tr2").style.display=styleDisplay;
+	get("tr0").style.display="none";
+}
+CreditCalculator.showNew=function(){
+	var styleDisplay="table-row";
+	if(document.all)styleDisplay="block";// for IE
+	get("tr1").style.display="none";
+	get("tr2").style.display="none";
+	get("tr0").style.display=styleDisplay;
+}
+

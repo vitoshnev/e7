@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/default/!svn/ver/12/CarJob.ru/htdocs/fckeditor/editor/filemanager/connectors/py
+END
+fckcommands.py
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/default/!svn/ver/12/CarJob.ru/htdocs/fckeditor/editor/filemanager/connectors/py/fckcommands.py
+END
+htaccess.txt
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/default/!svn/ver/12/CarJob.ru/htdocs/fckeditor/editor/filemanager/connectors/py/htaccess.txt
+END
+config.py
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/default/!svn/ver/12/CarJob.ru/htdocs/fckeditor/editor/filemanager/connectors/py/config.py
+END
+upload.py
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/default/!svn/ver/12/CarJob.ru/htdocs/fckeditor/editor/filemanager/connectors/py/upload.py
+END
+fckutil.py
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/default/!svn/ver/12/CarJob.ru/htdocs/fckeditor/editor/filemanager/connectors/py/fckutil.py
+END
+fckconnector.py
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/default/!svn/ver/12/CarJob.ru/htdocs/fckeditor/editor/filemanager/connectors/py/fckconnector.py
+END
+fckoutput.py
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/default/!svn/ver/12/CarJob.ru/htdocs/fckeditor/editor/filemanager/connectors/py/fckoutput.py
+END
+wsgi.py
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/default/!svn/ver/12/CarJob.ru/htdocs/fckeditor/editor/filemanager/connectors/py/wsgi.py
+END
+connector.py
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/default/!svn/ver/12/CarJob.ru/htdocs/fckeditor/editor/filemanager/connectors/py/connector.py
+END
+zope.py
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/default/!svn/ver/12/CarJob.ru/htdocs/fckeditor/editor/filemanager/connectors/py/zope.py
+END

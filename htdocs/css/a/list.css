@@ -1,0 +1,38 @@
+ul.list{margin:0;padding:1px 1px 0 1px;list-style:none;border:1px solid #ccc;width:40em}
+ul.list li{clear:both;margin:1px 0 0 0;padding:2px 2px 4px 26px;background-repeat:no-repeat;background-position:6px 6px;border-bottom:1px solid #eee;color:#999;background-image:url("/i/a/icon-item.gif");background-color:#f8f8ff}
+ul.list li.off{background-color:#eee;background-image:url("/i/a/icon-item-off.gif");}
+ul.list li.hot{background-color:#ffc}
+ul.list li div.short{font-size:0.7em}
+ul.folders li{background-image:url("/i/a/folder.gif");}
+ul.folders li.off{background-image:url("/i/a/folder-off.gif");}
+ul.catalogs li{background-image:url("/i/a/catalog.gif");}
+ul.products li{background-image:url("/i/a/product.gif");}
+ul.pages li{background-image:url("/i/a/page.gif");}
+ul.pages li.off{background-image:url("/i/a/page-off.gif");}
+ul.pages li.notInMenu{background-image:url("/i/a/page-off.gif");}
+ul.pages li.home{background-color:#fed}
+ul.list li.li1{}
+ul.list li.li2{}
+ul.list li.level0{}
+ul.list li.sep{background-image:none;background-color:#ddd;height:3px;padding:0;overflow:hidden;}
+ul.list li.level1{padding-left:52px;background-position:32px 6px;font-size:0.8em;line-height:1.7em}
+ul.list li.level2{padding-left:78px;background-position:58px 6px;font-size:0.8em}
+ul.list li.level3{padding-left:104px;background-position:84px 6px;font-size:0.8em}
+ul.list li.level4{padding-left:130px;background-position:110px 6px;font-size:0.8em}
+ul.list li.level5{padding-left:156px;background-position:136px 6px;font-size:0.8em}
+ul.list li.level6{padding-left:182px;background-position:162px 6px;font-size:0.8em}
+ul.list li.level7{padding-left:208px;background-position:188px 6px;font-size:0.8em}
+ul.list li.level8{padding-left:234px;background-position:214px 6px;font-size:0.8em}
+ul.list li.level9{padding-left:260px;background-position:240px 6px;font-size:0.8em}
+ul.list li.level10{padding-left:286px;background-position:266px 6px;font-size:0.8em}
+ul.list li.level11{padding-left:312px;background-position:292px 6px;font-size:0.8em}
+ul.list li.level12{padding-left:338px;background-position:318px 6px;font-size:0.8em}
+ul.list li.level13{padding-left:364px;background-position:344px 6px;font-size:0.8em}
+ul.list li.level14{padding-left:390px;background-position:370px 6px;font-size:0.8em}
+ul.list li.level15{padding-left:416px;background-position:396px 6px;font-size:0.8em}
+ul.list li div.icon{margin:4px 0 0 4px;width:20px;height:20px;text-align:center;float:right;cursor:pointer;}
+ul.list li div.nonactive{cursor:default}
+ul.list li div.icon img{width:16px;height:16px;}
+ul.list li div.icon img.flag{width:18px;height:12px;}
+ul.list li div.icon img.off{opacity:.20;filter:alpha(opacity=20);-moz-opacity:0.20;}
+ul.images li{margin:0;padding:4px}

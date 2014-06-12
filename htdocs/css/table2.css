@@ -1,0 +1,13 @@
+table.table2{width:100%;border:1px solid #aaa;border-collapse:collapse;border-spacing:0;}
+table.table2 th{background-color:#f3e9bd;color:#000;font-size:0.83em;font-weight:bold;text-align:center;padding:0.1em 0.5em 0.1em 0.5em;border:1px solid #aaa;}
+table.table2 th.sep{border-left:1px solid #aaa;}
+table.table2 td{padding:0.1em 0.5em 0.1em 0.5em;border:1px solid #aaa;font-size:0.83em;vertical-align:top}
+table.table2 td.sep{border-left:3px solid #aaa;}
+table.table2 tr.sep td{border-top:1px solid #aaa;}
+table.table2 tr.tr1 td{}
+table.table2 tr:hover td{background:#def4fa;}
+table.table2 tr td{text-align:center;}
+table.table2 tr td img{border:none;}
+table.table2 tr.tr2 td{background-color:#d0d0d0;}
+table.table2 tr.trt td{background-color:#fff;font-size:1em;font-weight:bold}
+table.table2 tr.sale td{color:#959595;}

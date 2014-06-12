@@ -1,0 +1,30 @@
+/**
+	Input container:
+*/
+div.iCalendar{position:relative;padding-right:6px;cursor:pointer;}
+div.iCalendar:hover{padding-right:5px}
+div.iCalendar input{background:url('/i/icon-calendar.gif') no-repeat right 0;cursor:pointer}
+
+/**
+	Calendar itself:
+*/
+div.calendar{position:absolute;z-index:10;font-size:1em;width:211px;padding-left:6px;background:url('/i/calendar-arrow.gif') no-repeat 0 6px}
+div.calendar table{background:#ff4526;border-spacing:0;border-collapse:collapse;width:211px;}
+
+div.calendar table tr.year th{padding:0;height:25px;color:#fff;text-align:center;background:#000;border:1px solid #000;border-bottom:0;text-transform:uppercase;font-weight:bold;vertical-align:middle}
+div.calendar table tr.year th img{display:block;width:16px;height:16px;cursor:pointer;}
+div.calendar table tr.year th img.l{float:left;margin-left:8px}
+div.calendar table tr.year th img.r{float:right;;margin-right:8px}
+
+div.calendar table tr.month th{padding:0;height:25px;color:#fff;text-align:center;background:#000;border:1px solid #000;border-bottom:0;text-transform:uppercase;font-weight:bold;vertical-align:middle}
+div.calendar table tr.month th img{display:block;width:16px;height:16px;cursor:pointer;}
+div.calendar table tr.month th img.l{float:left;margin-left:8px}
+div.calendar table tr.month th img.r{float:right;;margin-right:8px}
+
+div.calendar table tr.weekDays th{padding:0;height:20px;color:#888;text-align:center;background:#f4f4f4;border:1px solid #f4f4f4;border-bottom:0;text-transform:uppercase;font-weight:bold;vertical-align:middle;font-size:0.7em}
+div.calendar table tr td{border:1px solid #d43920;padding:0;height:29px;color:#fff;text-align:center;vertical-align:middle}
+div.calendar table tr td.prevMo{color:#ccc;background:#d93b20}
+div.calendar table tr td.nextMo{color:#ccc;background:#d93b20}
+div.calendar table tr td.today{cursor:pointer;color:#fff;font-weight:bold;background:#e47361;}
+div.calendar table tr td.sel{cursor:pointer;color:#ff4526;background:#f6f6f6 url('/i/calendar-sel.gif') no-repeat center center;}
+div.calendar table tr td.over{cursor:pointer;color:#ff4526;background:#f6f6f6 url('/i/calendar-sel.gif') no-repeat center center;}

@@ -1,0 +1,59 @@
+form input:-webkit-autofill {background-color: #fff !important;}
+
+form{margin:0;padding:0;font-size:1em;}
+form input{font:bold 1em Arial,Tahoma,Verdana,Arial,Sans-Serif;color:#66c;width:100%;padding:10px 10px 8px 10px;box-sizing:border-box;border:0;color:#888;overflow:hidden;background-color:#fff;border-radius:3px;margin:0;background-image: linear-gradient(to bottom, #eee 0%,#ffffff 85%,#eee 100%);box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);}
+form input:hover{box-shadow:0 0 5px #1fbba6;transition:all 0.1s ease-out 0s;background-image: none;}
+form input:focus{color:#000;box-shadow:0 0 7px #99c;}
+form input.iFocus{border:2px solid #fe0000;padding:9px;background-color:#fcc;}
+form input.iFocus:hover{box-shadow:0 0 7px #fe0000;transition:all 0.1s ease-out 0s;}
+
+/*form{margin:0;padding:0;font-size:1em}
+form div.i{padding:10px;border:1px solid #ccc;color:#888;overflow:hidden;background-color:#eef;overflow:hidden;border-radius:3px}
+form div.i:hover{box-shadow:0 0 7px #99c;transition:all 0.1s ease-out 0s;}
+form div.iStatic{padding:7px;}
+form div.iFocus{border:2px solid #fe0000;padding:9px;background-color:#fcc;}
+form div.iFocus:hover{box-shadow:0 0 7px #fe0000;transition:all 0.1s ease-out 0s;}
+
+form div.i input{padding:0;outline:0;background:#eef;}
+form div.iFocus input{background-color:#fcc;color:#000}
+form div.i input.hint{color:#aaa;}
+form div.i select{font:1em Arial,Tahoma,Verdana,Arial,Sans-Serif;color:#000;border:0;width:100%;padding:0;outline:0}
+form div.iFocus select{background-color:#fcc;color:#000}
+form div.i select.hint{color:#5c5c5c}
+form div.i textarea{font:1em Arial,Tahoma,Verdana,Arial,Sans-Serif;color:#000;border:0;width:100%;padding:0;outline:0}
+form div.i textarea.hint{color:#5c5c5c}
+
+form div.if{float:left;}
+form div.ifr{float:right;text-align:right}
+
+form div.hint{color:#aaa;font-size:0.83em;}
+
+form input[type="checkbox"],input[type="radio"]{background:transparent;border:0;width:auto}
+
+label{cursor:pointer;font-size:1em;}
+label:hover{color:#000}*/
+
+form table.form{border-collapse:collapse;border-spacing:0;width:100%;}
+form table.form th{display:none;}
+form table.form span.star{color:#f60;font-weight:bold;margin-left:0.3em}
+form table.form td{padding:0.5em 0;vertical-align:top;}
+form table.form tr.h td{color:#b7b7b7;font-weight:bold;padding-top:2em}
+form table.form tr.err input{background-color:#fcc;color:#000;border:2px solid #fe0000;padding:9px;background-color:#fcc;box-shadow:0 0 7px #c00;}
+form table.form tr.err select{background-color:#fcc;color:#000}
+form table.form tr.err div.hint{color:#fff;}
+
+input.btn{border-radius:3px;box-sizing:border-box;border:0;padding:7px 0 10px 0;margin:0;color:#fff;background:#14b9d5;font:bold 1em 'Segoe UI',Arial;cursor:pointer;text-transform:uppercase;}
+input.btn:hover{background:#f37936;color:#fff;box-shadow:0 0 7px #f37936;}
+input.btn:focus{box-shadow:0 0 7px #f37936;color:#fff}
+
+div.err{border-left:8px solid #000;padding:1em;margin:1em 0 1em 0;color:#fff;background-color:#ff4526;}
+div.err a{color:#fff}
+div.msg{border-left:8px solid #000;padding:1em;margin:1em 0 1em 0;color:#fff;background-color:#ff4526;}
+div.info{border-left:8px solid #ccc;padding:1em;margin:1em 0 1em 0;color:#666;background-color:#f8f8f8;}
+
+div#formErrMsg{position:absolute;width:320px;background:#f33;color:#fff;padding:10px;border-radius:5px;}
+
+div.icon{width:24px;height:24px;border-radius:3px;background-repeat:no-repeat;background-position:0 0;cursor:pointer;}
+div.icon:hover{background-position:0 -24px;background-color:#323a45;box-shadow:0 0 5px #ccc}
+div.iconDel{background-image:url('/i/iconDel.png')}
+div.iconMemberPlus{background-image:url('/i/iconMemberPlus.png')}

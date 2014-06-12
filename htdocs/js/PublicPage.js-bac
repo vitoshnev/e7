@@ -1,0 +1,524 @@
+function dwe(){
+	d.write(String.fromCharCode.apply(this,arguments));
+}
+function get(id){
+	return d.getElementById(id);
+}
+
+var PublicPage={};
+var PP=PublicPage;
+
+/**
+	IPad safe rollover+click. Tries to skip click event with first click to allow over effect.
+*/
+PublicPage.go=function(el,url){
+	if(BrowserDetect.OS!="iPad"&&BrowserDetect.OS!="iPhone") self.location.href=url;
+	//if(!el.onmouseover)return;
+
+	if(el.getAttribute("isTouched")){
+		self.location.href=url;
+	}
+	else el.setAttribute("isTouched",1);
+}
+
+/*********************************
+	Fade functions
+*/
+PublicPage.showFade=function(){
+	var f=get("fade");
+	CSS.setOpacity(f,0);
+	CSS.a(f,"visible");
+	PP.placeFade();
+	FX.fadeIn(f,0.75,250);
+}
+PublicPage.placeFade=function(){
+	var f=get("fade");
+	f.style.top="0px";//screenScrollTop+"px";
+	f.style.left="0px";
+
+	var w=d.body.offsetWidth;
+	if(w<screenScrollLeft+screenWidth)w=screenScrollLeft+screenWidth;
+	f.style.width=w+"px";
+
+	var h=d.body.offsetHeight;
+	if(h<screenScrollTop+screenHeight)h=screenScrollTop+screenHeight;
+	f.style.height=h+"px";
+};
+PublicPage.hideFade=function(){
+	var f=get("fade");
+	FX.fadeOut(f,0,250,function(fx){
+		CSS.r(f,"visible");
+	});
+};
+
+/*********************************
+	Main menu functions
+	Damn IE8- needs hack around with cufoned menus.
+*/
+PublicPage.menuHideQ=new Array();
+PublicPage.onMenuOver=function(li){
+	if(BrowserDetect.browser=="Opera"||(BrowserDetect.browser=="Explorer"&&BrowserDetect.version<=8)){
+		// remove li from q:
+		for(var i=0;i<PP.menuHideQ.length;i++){
+			var h=PP.menuHideQ[i];
+			if(h.li==li){
+				clearTimeout(h.timeout);
+				PP.menuHideQ.splice(i,1);
+			}
+		}
+	}
+	CSS.a(li,'over');
+}
+PublicPage.onMenuOut=function(li){
+	if(BrowserDetect.browser=="Opera"||(BrowserDetect.browser=="Explorer"&&BrowserDetect.version<=8)){
+		PP.menuHideQ.push({
+			timeout:setTimeout("PublicPage.hideMenuItem()",50),
+			li:li
+		});
+	}
+	else CSS.r(li,'over');
+}
+PublicPage.hideMenuItem=function(){
+	// take first item from q:
+	var h=PP.menuHideQ.shift();
+	CSS.r(h.li,'over');
+	clearTimeout(h.timeout);
+}
+
+/*********************************
+	On resize, on scroll functions
+*/
+PublicPage.onWResize=function(){
+	Screen.getSize();
+	Screen.getScroll();
+
+	/*
+	var x=document.body;
+	if(Screen.width<1200)x.className="w1024";
+	else if(Screen.width<=1500)x.className="w1280";
+	else if (Screen.width<=1900 ) x.className="w1680";
+	else x.className="w1920";
+
+	//if(Screen.width<1240) CSS.a(x,"w1024");
+	//else if(Screen.width<=1500) CSS.a(x,"w1280");
+	//else CSS.a(x,"w1680");
+
+	if(Screen.height<500)CSS.a(x,"h500");
+	else if(Screen.height<=600)CSS.a(x,"h600");
+	else if(Screen.height<=700)CSS.a(x,"h700");
+	else if(Screen.height<=800)CSS.a(x,"h800");
+	else if(Screen.height<=900)CSS.a(x,"h900");
+	else CSS.a(x,"h1000");*/
+
+	//center brandMenu:
+	/*var bm=get("brandMenu");
+	if(brandMenu){
+		var l=get("layout");
+		brandMenu.style.left=Math.round(l.offsetWidth/2-brandMenu.offsetWidth/2)+"px";
+	}*/
+
+	if(PP.isSourceShown){
+		PP.placeFade();
+		PP.placeSource();
+	}
+	if(PP.isCallRequestShown){
+		PP.placeFade();
+		PP.placeCallRequestForm();
+	}
+	if(PP.isFeedbackShown){
+		PP.placeFade();
+		PP.placeFeedback();
+	}
+}
+PublicPage.onWScroll=function(){
+	Screen.getSize();
+	Screen.getScroll();
+
+	if(PP.isSourceShown){
+		PP.placeFade();
+		PP.placeSource();
+	}
+	if(PP.isCallRequestShown){
+		PP.placeFade();
+		PP.placeCallRequestForm();
+	}
+	if(PP.isFeedbackShown){
+		PP.placeFade();
+		PP.placeFeedback();
+	}
+}
+
+/*********************************
+	Feedback functions
+*/
+PublicPage.isFeedbackShown=false;
+PublicPage.closeFeedbackForm=function(){
+	if(!PP.isFeedbackShown)return;
+
+	PP.isFeedbackShown=false;
+
+	var c=get("feedbackForm");
+	FX.fadeOut(c,0,250,function(fx){
+		var c=get("feedbackForm");
+		c.style.display="none";
+	});
+
+	PublicPage.hideFade();
+}
+PublicPage.showFeedback=function(){
+	PublicPage.isFeedbackShown=true;
+
+	var l=d.getElementById("feedbackFormLoading");
+	l.style.display="none";
+	var l=d.getElementById("feedbackFormMain");
+	l.style.display="block";
+
+	Form.setHint(get("formFeedback").msg);
+	Form.setHint(get("formFeedback").name);
+	Form.setHint(get("formFeedback").email);
+
+	var c=d.getElementById("feedbackForm");
+	CSS.setOpacity(c,0);
+	c.style.display="block";
+	PublicPage.placeFeedback();
+	FX.fadeIn(c,1,250);
+
+	PublicPage.showFade();
+}
+PublicPage.placeFeedback=function(){
+	if(!PublicPage.isFeedbackShown)return;
+
+	var c=d.getElementById("feedbackForm");
+	var s=Screen.scrollTop;
+	//alert(s+" : "+Screen.height/2 + " : "+ c.offsetHeight);
+	c.style.top=Math.round(s+Screen.height/2-c.offsetHeight/2)+"px";
+	c.style.left=Math.round(Screen.width/2-c.offsetWidth/2)+"px";
+}
+PublicPage.submitFeedback=function(f){
+	if(!Form.check(f))return false;
+
+	var p=d.getElementById("feedbackFormMain");
+	p.style.display="none";
+
+	var l=d.getElementById("feedbackFormLoading");
+	l.style.display="block";
+
+	var ajax=new Ajax();
+	var r="isInstant=1"
+		+"&url="+encodeURI(f.url.value)
+		+"&h1="+encodeURI(f.h1.value)
+		+"&name="+encodeURI(f.name.value)
+		+"&email="+encodeURI(f.email.value)
+		+"&msg="+encodeURI(f.msg.value);
+	ajax.onResponse=function(x){
+		Screen.getSize();
+		Screen.getScroll();
+		//f.reset();
+		d.getElementById("feedbackForm").style.display="none";
+		alert("Спасибо!\nВаше мнение очень важно для нас!");
+
+		PublicPage.closeFeedbackForm();
+
+		return;
+	}
+	ajax.send("/InstantMsg.html",r);//?rnd"+Math.random());
+	return false;
+}
+
+/*********************************
+	Source functions
+*/
+var Source=function(name,address,lat,lng,zoom){
+	this.name=name;
+	this.address=address;
+	this.lat=lat;
+	this.lng=lng;
+	this.zoom=zoom;
+};
+Source.setByBrandId=function(brandId){
+	var inputs=HTML.children(d.body,"input");
+	var labels=HTML.children(d.body,"label");
+	var activeInputs=new Array();
+	for(var i=0;i<inputs.length;i++){
+		var input=inputs[i];
+		if(input.type!="radio")continue;
+
+		var brandIds=input.getAttribute("brandIds");
+		if(!brandIds)continue;
+
+		brandIds=brandIds.split(",");
+		for(var j=0;j<brandIds.length;j++){
+			if(brandIds[j]==brandId){
+				input.disabled=false;
+				activeInputs.push(input);
+
+				var forId=input.id;
+				if(forId){
+					for(var k=0;k<labels.length;k++){
+						if(labels[k].getAttribute("for")==forId){
+							labels[k].disabled=false;
+							CSS.r(labels[k],"disabled");
+							break;
+						}
+					}
+				}
+
+
+				// go to new input
+				break;
+			}
+			else{
+				input.disabled=true;
+				input.checked=false;
+
+				var forId=input.id;
+				if(forId){
+					for(var k=0;k<labels.length;k++){
+						if(labels[k].getAttribute("for")==forId){
+							CSS.a(labels[k],"disabled");
+							break;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// check input if it is a single one:
+	if(activeInputs.length==1){
+		activeInputs[0].checked=true;
+	}
+}
+
+PublicPage.map=null;
+PublicPage.isSourceShown=false;
+PublicPage.withTopPad=false;
+PublicPage.sources={};
+PublicPage.showSource=function(sourceId){
+	if(PP.isSourceShown)return;
+
+	PP.isSourceShown=true;
+	if(BrowserDetect.browser=="MobileIe") PP.withTopPad=true;
+
+	PublicPage.showFade();
+
+	var map=get("sourceBlock");
+	CSS.setOpacity(map,0);
+	map.style.display="block";
+	PP.placeSource();
+
+	var s=PP.sources['Source'+sourceId];
+
+	if(!PublicPage.map){
+		PublicPage.map=new ymaps.Map("sourceMap", {
+				center:[s.lat,s.lng],
+				zoom:s.zoom
+			}
+		);
+		PublicPage.map.controls.add("zoomControl");
+	}
+	PublicPage.setMapPoint([s.lat,s.lng],s.name+"<br >"+s.address,true);
+
+	FX.fadeIn(map,1,250);
+};
+PublicPage.mapPoint=null;
+PublicPage.setMapPoint=function(coords,address,pan){
+	if(PublicPage.mapPoint)PublicPage.map.geoObjects.remove(PublicPage.mapPoint);
+
+	var p=new ymaps.Placemark(
+		coords, {
+			balloonContent: address
+		}
+	);
+	PublicPage.mapPoint=p;
+
+	PublicPage.map.geoObjects.add(p);
+	if(pan){
+		PublicPage.map.panTo(coords,{flying: true,checkZoomRange:false,callback:function(){PublicPage.map.setZoom(14);}});
+	}
+}
+PublicPage.closeSource=function (){
+	if(!PP.isSourceShown)return;
+	PublicPage.isSourceShown=false;
+
+	var c=get("sourceBlock");
+	FX.fadeOut(c,0,250,function(fx){
+		PublicPage.map.destroy();
+		PublicPage.map=null;
+
+		var c=get("sourceBlock");
+		c.style.display="none";
+	});
+
+	PP.hideFade();
+};
+PublicPage.placeSource=function(){
+	if(!PublicPage.isSourceShown)return;
+
+	var c=d.getElementById("sourceBlock");
+	var s=Screen.scrollTop;
+	//alert(s+" : "+Screen.height/2 + " : "+ c.offsetHeight);
+	c.style.top=Math.round(s+Screen.height/2-c.offsetHeight/2)+"px";
+	c.style.left=Math.round(Screen.width/2-c.offsetWidth/2)+"px";
+};
+
+/*********************************
+	Call request functions
+*/
+PublicPage.isCallRequestShown=false;
+PublicPage.showCallRequestForm=function(text,theme,target){
+
+	if(text) get("callRequestText").innerHTML=text;
+	else get("callRequestText").innerHTML="Пожалуйста, укажите Ваше имя и телефон и мы перезвоним Вам в самое ближайшее время!";
+
+	if(theme) {
+		get("formCallRequest").msg.value=theme;
+		CSS.r(get("formCallRequest").msg,"hint");
+	}
+	else Form.setHint(get("formCallRequest").msg);
+
+	if(target) get("formCallRequest").target.value=target;
+	else get("formCallRequest").target.value="";
+
+	// show form:
+	PublicPage.isCallRequestShown=true;
+
+	var l=d.getElementById("callRequestFormLoading");
+	l.style.display="none";
+	var l=d.getElementById("callRequestFormMain");
+	l.style.display="block";
+
+	var c=d.getElementById("callRequestForm");
+	CSS.setOpacity(c,0);
+	c.style.display="block";
+	PublicPage.placeCallRequestForm();
+	FX.fadeIn(c,1,250);
+
+	PP.showFade();
+}
+PublicPage.closeCallRequestForm=function(){
+	if(!PP.isCallRequestShown)return;
+	PublicPage.isCallRequestShown=false;
+
+	var c=get("callRequestForm");
+	FX.fadeOut(c,0,250,function(fx){
+		var c=get("callRequestForm");
+		c.style.display="none";
+	});
+
+	PublicPage.hideFade();
+}
+PublicPage.placeCallRequestForm=function(){
+	if(!PublicPage.isCallRequestShown)return;
+
+	var c=d.getElementById("callRequestForm");
+	var s=Screen.scrollTop;
+	//alert(s+" : "+Screen.height/2 + " : "+ c.offsetHeight);
+	c.style.top=Math.round(s+Screen.height/2-c.offsetHeight/2)+"px";
+	c.style.left=Math.round(Screen.width/2-c.offsetWidth/2)+"px";
+}
+PublicPage.submitCallRequestForm=function(f){
+	if(!Form.check(f))return false;
+
+	var p=d.getElementById("callRequestFormMain");
+	p.style.display="none";
+	var l=d.getElementById("callRequestFormLoading");
+	l.style.display="block";
+	var ajax=new Ajax();
+	var r="name="+encodeURI(f.name.value)
+		+"&phone="+encodeURI(f.phone.value)
+		+"&target="+encodeURI(f.target.value)
+		+"&msg="+encodeURI(f.msg.value);
+	ajax.onResponse=function(x){
+		//f.reset();
+		d.getElementById("callRequestForm").style.display="none";
+
+		var r=eval("("+x.responseText+")");
+		if(r.status)alert("Спасибо!\nНаш менеджер свяжется с Вами в ближайшее время!");
+
+			PublicPage.closeCallRequestForm();
+
+		PublicPage.isCallRequestShown=false;
+	}
+	ajax.send("/CallRequest.json",r);//?rnd"+Math.random());
+	return false;
+}
+
+/*********************************
+ SetCity
+*/
+
+PP.showCityForm=function(){
+
+	// show form:
+	PP.isCityShown=true;
+
+	var l=d.getElementById("cityFormLoading");
+	l.style.display="none";
+	var l=d.getElementById("cityFormMain");
+	l.style.display="block";
+
+	var c=d.getElementById("cityForm");
+	CSS.setOpacity(c,0);
+	c.style.display="block";
+	PP.placeCityForm();
+	FX.fadeIn(c,1,250);
+
+	PP.showFade();
+}
+PP.closeCityForm=function(){
+	if(!PP.isCityShown)return;
+	PP.isCityShown=false;
+
+	var c=get("cityForm");
+	FX.fadeOut(c,0,250,function(fx){
+		var c=get("cityForm");
+		c.style.display="none";
+		PP.hideFade();
+	});
+}
+PP.placeCityForm=function(){
+	if(!PP.isCityShown)return;
+
+	var c=d.getElementById("cityForm");
+	var s=Screen.scrollTop;
+	//alert(s+" : "+Screen.height/2 + " : "+ c.offsetHeight);
+	c.style.top=Math.round(s+Screen.height/2-c.offsetHeight/2)+"px";
+	c.style.left=Math.round(Screen.width/2-c.offsetWidth/2)+"px";
+}
+PP.submitCityForm=function(f){
+	PP.closeCityForm();
+}
+
+/*********************************
+	Init
+*/
+PublicPage.init=function(){
+	BrowserDetect.init();
+
+	/*if(Cufon){
+		Cufon.replace('h1',{hover:true});
+		Cufon.replace('h2');
+		Cufon.replace('h3');
+		Cufon.replace('h4');
+		Cufon.replace('h5');
+		//Cufon.replace('#menu',{hover:true,hoverables:{li:true}});
+		//Cufon.replace('#subMenu',{hover:true});
+
+		//Cufon.replace('#menu');
+		//Cufon.replace('#subMenu');
+
+		// apply Cufon for old IEs:
+		if(BrowserDetect.browser=="Explorer"&&BrowserDetect.version<=7){
+			var els=HTML.children(d.body,null,"CF");
+			for(var i=0;i<els.length;i++){Cufon.replace(els[i]);}
+		}
+		else Cufon.replace('.CF',{hover:true});
+	}
+	else CSS.a(d.body,"visible");*/
+
+	Event.on(self,"resize",PublicPage.onWResize);
+	Event.on(self,"scroll",PublicPage.onWScroll);
+	PublicPage.onWResize();
+}
+onReadys.push(PublicPage.init);

@@ -1,0 +1,14 @@
+div.err{
+	border-left:8px solid #f00;
+	color:#000;padding:1em;margin:0 0 1em 0;
+	background-color:#fee;}
+div.err h1{
+	color:#f00;
+	font-weight:bold;
+	padding:0;
+	margin:4px 0 12px 0;}
+div.err div.icon{float:left;margin:0 1em 0 0;width:48px;height:48px;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/i/a/icon-err.png'),sizingMethod=crop)}
+html>body div.err div.icon{background-image:url("/i/a/icon-err.png");background-repeat:no-repeat;}
+
+div.msg{border-left:8px solid #f90;padding:1em;margin:1em 0 1em 0;color:#000;background-color:#ffc;}
+div.info{border-left:8px solid #ddf;padding:1em;margin:1em 0 1em 0;background-color:#eef;}

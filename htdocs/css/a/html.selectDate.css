@@ -1,0 +1,11 @@
+table.html-selectDate{border-collapse:collapse;border-spacing:0;width:auto}
+table.html-selectDate td{padding:0 !important;border:0;}
+table.html-selectDate select.day{width:4em;min-width:0}
+table.html-selectDate select.month{width:7.5em;min-width:0}
+table.html-selectDate select.year{width:5em;min-width:0}
+
+table.html-selectTimeHM{border-collapse:collapse;border-spacing:0;}
+table.html-selectTimeHM td{padding:0;border:0;}
+table.html-selectTimeHM select.hour{width:3em}
+table.html-selectTimeHM select.minute{width:3em}
+

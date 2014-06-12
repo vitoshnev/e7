@@ -1,0 +1,5 @@
+select.tree option{color:#44f;}
+select.tree option.child{color:#99f;}
+select.tree option.sel{color:black;}
+select.tree option.root{color:#99f}
+select.tree option.shortcut{color:#ccc}

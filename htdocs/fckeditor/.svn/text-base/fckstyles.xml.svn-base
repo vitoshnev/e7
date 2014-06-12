@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+ * FCKeditor - The text editor for Internet - http://www.fckeditor.net
+ * Copyright (C) 2003-2008 Frederico Caldeira Knabben
+ *
+ * == BEGIN LICENSE ==
+ *
+ * Licensed under the terms of any of the following licenses at your
+ * choice:
+ *
+ *  - GNU General Public License Version 2 or later (the "GPL")
+ *    http://www.gnu.org/licenses/gpl.html
+ *
+ *  - GNU Lesser General Public License Version 2.1 or later (the "LGPL")
+ *    http://www.gnu.org/licenses/lgpl.html
+ *
+ *  - Mozilla Public License Version 1.1 or later (the "MPL")
+ *    http://www.mozilla.org/MPL/MPL-1.1.html
+ *
+ * == END LICENSE ==
+ *
+ * This is the sample style definitions file. It makes the styles combo
+ * completely customizable.
+ *
+ * See FCKConfig.StylesXmlPath in the configuration file.
+-->
+<Styles>
+	<Style name="Без обтекания" element="p">
+		<Style name="clear" value="both" />
+	</Style>
+	<Style name="Псевдо жирный" element="p">
+		<Attribute name="class" value="b" />
+	</Style>
+	<Style name="Псевдо H1" element="p">
+		<Attribute name="class" value="h1" />
+	</Style>
+	<Style name="Псевдо H2" element="p">
+		<Attribute name="class" value="h2" />
+	</Style>
+	<Style name="Псевдо H2 без обтекания" element="p">
+		<Attribute name="class" value="h2" />
+		<Style name="clear" value="both" />
+	</Style>
+	<Style name="Псевдо H3" element="p">
+		<Attribute name="class" value="h3" />
+	</Style>
+	<Style name="Псевдо H3 без обтекания" element="p">
+		<Attribute name="class" value="h3" />
+		<Style name="clear" value="both" />
+	</Style>
+	<Style name="Увеличенный" element="p">
+		<Attribute name="class" value="increased" />
+	</Style>
+	<Style name="С нового абзаца" element="p">
+		<Style name="clear" value="both" />
+	</Style>
+
+	<Style name="Без рамки" element="img">
+		<Attribute name="class" value="iNoBorder" />
+	</Style>
+	<Style name="Влево с обтеканием" element="img">
+		<Attribute name="class" value="iLeft" />
+	</Style>
+	<Style name="Влево с обтеканием без рамки" element="img">
+		<Attribute name="class" value="iLeft iNoBorder" />
+	</Style>
+	<Style name="Вправо с обтеканием" element="img">
+		<Attribute name="class" value="iRight" />
+	</Style>
+	<Style name="Вправо с обтеканием без рамки" element="img">
+		<Attribute name="class" value="iRight iNoBorder" />
+	</Style>
+	<Style name="С нового абзаца" element="img">
+		<Attribute name="class" value="iClear" />
+	</Style>
+</Styles>

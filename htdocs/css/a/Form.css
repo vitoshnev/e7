@@ -1,0 +1,55 @@
+form{margin:0;padding:0;font-size:1em}
+
+form input{font:1em Arial,Tahoma,Verdana,Arial,Sans-Serif;color:#000;width:100%;padding:0.2em;outline:0}
+form input.hint{color:#888;}
+form select{font:1em Arial,Tahoma,Verdana,Arial,Sans-Serif;color:#000;width:100%;padding:0.2em;outline:0}
+form select.hint{color:#888}
+form textarea{font:1em Arial,Tahoma,Verdana,Arial,Sans-Serif;color:#000;width:100%;padding:0;outline:0}
+form textarea.hint{color:#888}
+
+form div.i{padding:6px;border:1px solid #8a8a8a;color:#888;overflow:hidden;background-color:#fff;overflow:hidden}
+form div.i:hover{border:2px solid #fe0000;padding:5px}
+form div.iFocus{border:2px solid #fe0000;padding:5px;background-color:#fcc;}
+form div.iFocus input{background-color:#fcc;color:#000}
+form div.iFocus select{background-color:#fcc;color:#000}
+
+form div.i input{font:1em Arial,Tahoma,Verdana,Arial,Sans-Serif;color:#000;border:0;width:100%;padding:0;outline:0}
+/*form div.i input.clicked{color:#000}*/
+form div.i input.hint{color:#888;}
+form div.i select{font:1em Arial,Tahoma,Verdana,Arial,Sans-Serif;color:#000;border:0;width:100%;padding:0;outline:0}
+/*form div.i select.clicked{color:#000}*/
+form div.i select.hint{color:#888}
+form div.i textarea{font:1em Arial,Tahoma,Verdana,Arial,Sans-Serif;color:#000;border:0;width:100%;padding:0;outline:0}
+form div.i textarea.hint{color:#888}
+
+form div.if{float:left;}
+form div.ifr{float:right;text-align:right}
+
+form div.hint{color:#aaa;font-size:0.83em;}
+
+input[type="checkbox"],input[type="radio"]{background:transparent;border:0;width:auto}
+label{cursor:pointer;font-size:1em;}
+label:hover{color:#000}
+
+form table.form{border-collapse:collapse;border-spacing:0;min-width:700px;width:100%;max-width:1200px}
+form table.form th{width:12em;padding:0.5em 1em 0.5em 0;text-align:left;font-weight:normal;}
+form table.form th.r{color:#000}
+form table.form span.star{color:#f60;font-weight:bold;margin-left:0.3em}
+form table.form td{padding:0.5em 0;vertical-align:top;}
+form table.form tr.h td{color:#b7b7b7;font-weight:bold;padding-top:2em}
+form table.form tr.err div.i{border:2px solid #fe0000;padding:5px;background-color:#fcc;}
+form table.form tr.err input{background-color:#fcc;color:#000}
+form table.form tr.err select{background-color:#fcc;color:#000}
+form table.form tr.err div.hint{color:#fff;}
+
+form input.btn{height:28px;width:auto;padding:0 0.5em 2px 0.5em;margin:0;border:0;color:#fff;background:#069;font-size:0.75em;cursor:pointer;text-transform:uppercase;font-weight:bold}
+form input.btn:hover{background:#036;}
+
+/* filter */
+div.filter{border:1px solid #eee;background-color:#eee;margin:0 0 1em 0;padding:0.5em;font-size:0.75em}
+div.filter table{border-collapse:collapse;border-spacing:0;}
+div.filter table th{padding:0.25em;}
+div.filter table td{padding:0.25em;}
+div.filter table td input{width:90%;min-width:150px}
+div.filter table td select{width:90%;min-width:150px}
+div.filter table td input.btn{width:auto;height:22px;font-size:0.83em}

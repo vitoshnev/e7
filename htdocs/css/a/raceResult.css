@@ -1,0 +1,23 @@
+table.raceResult{width:100%;border-spacing:0;border-collapse:collapse;margin:0 0 1em 0;border:1px solid #feb67c;}
+table.raceResult th{font-size:0.6em;padding:0.2em;border-top:3px solid #feb67c;line-height:1.1em;border-bottom:1px solid #feb67c;}
+table.raceResult th.roundPlace{border-top:0;}
+table.raceResult th.roundPlace1{border-left:1px solid #feb67c;}
+table.raceResult th.roundScore{border-top:0;}
+table.raceResult th.round{border-bottom:0;}
+table.raceResult th.round1{border-left:1px solid #feb67c;}
+table.raceResult th.score{border-left:1px solid #feb67c;}
+table.raceResult th.place{}
+table.raceResult td{padding:0.2em 0.5em;b_order-top:1px solid #feb67c;text-align:center;font-size:0.83em;background-color:#fff2e2}
+table.raceResult td.i{color:#feb67c}
+table.raceResult td.roundPlace1{border-left:1px solid #feb67c}
+table.raceResult tr.tr2 td{background:none}
+table.raceResult td.name{text-align:left}
+table.raceResult td.clubCity{text-align:left}
+table.raceResult td.score{border-left:1px solid #feb67c;}
+table.raceResult td.place{}
+table.raceResult tr.err td{background:#fcc;border-top:1px solid #f00;border-bottom:1px solid #f00}
+table.raceResult tr td div.errMsg{color:#f00;font-weight:bold}
+/*table.raceResult td.score{background:#efcea3;border-left:1px solid #feb67c}
+table.raceResult td.place{background:#efcea3;border-left:1px solid #feb67c}
+table.raceResult tr.tr2 td.score{background:#ffebd3}
+table.raceResult tr.tr2 td.place{background:#ffebd3}*/

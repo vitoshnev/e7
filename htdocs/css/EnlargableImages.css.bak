@@ -1,0 +1,11 @@
+.enlargable{cursor:pointer;}
+div#enlargableImageLoader{display:none;position:absolute;z-index:10002;background:#fff url('/i/busy.gif') no-repeat center center;opacity:0.75;filter:alpha(opacity=75);}
+div#imageViewerControl{display:none;position:absolute;z-index:10002;width:208px;height:64px;}
+div#imageViewerControl.visible{display:block;}
+div#imageViewerControlPrev{float:left;width:64px;margin:0 8px 0 0;height:64px;background-image:url('/i/imageViewer.prev.gif');background-repeat:no-repeat;background-position:0 0;cursor:pointer;}
+div#imageViewerControlPrev.disabled{background-position:0 -64px;cursor:default}
+div#imageViewerControlNext{float:left;width:64px;margin:0 8px 0 0;height:64px;background-image:url('/i/imageViewer.next.gif');background-repeat:no-repeat;background-position:0 0;cursor:pointer;}
+div#imageViewerControlNext.disabled{background-position:0 -64px;cursor:default}
+div#imageViewerControlClose{float:left;width:64px;height:64px;background:url('/i/imageViewer.close.gif') no-repeat 0 0;cursor:pointer;}
+img.imageViewerLoading{background:#f8f8f8 url('/i/busy.gif') no-repeat center center;}
+div.imageViewerText{position:absolute;z-index:10001;font-size:1.4em;color:#000;text-align:center;width:70%;height:2em;overlow:hidden;}

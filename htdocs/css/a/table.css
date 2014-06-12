@@ -1,0 +1,16 @@
+table.table{width:100%;border:1px solid #aaa;background-color:#cef;border-collapse:collapse;border-spacing:0;}
+table.table TR TD{background-color:#f0f0f8;}
+table.table TR.tr2 TD{background-color:#f8f8ff;}
+table.table TR.off TD{background-color:#e0e0e0;color:#999}
+table.table TR.hot TD{background-color:#ffc;}
+table.table TR.hot TD{background-color:#ffc;}
+table.table TR.hot2 TD{background-color:#ffa;}
+table.table TH{background-color:#09C;color:#fff;font-size:0.8em;font-weight:bold;text-align:center;padding:0.1em 0.5em 0.1em 0.5em;border:1px solid #966;}
+table.table TD{padding:0.25em 0.5em;color:#000;border:1px solid #aaa;}
+table.table TR:hover TD{background-color:#fc0;}
+table.table A{}
+
+table.table tr:nth-child(even) {background: #f8f8ff}
+table.table tr:nth-child(odd) {background: #f0f0ff}
+
+table.table img.icon{border:none;width:16px;height:16px;}

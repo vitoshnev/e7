@@ -1,0 +1,5 @@
+div.err{border-left:8px solid #000;padding:1em;margin:1em 0 1em 0;color:#fff;background-color:#ff4526;}
+div.err a{color:#fff}
+div.msg{border-left:8px solid #000;padding:1em;margin:1em 0 1em 0;color:#fff;background-color:#ff4526;}
+div.info{border-left:8px solid #ccc;padding:1em;margin:1em 0 1em 0;color:#666;background-color:#f8f8f8;}
+div.um{border-left:8px solid #f90;padding:1em;margin:1em 0 1em 0;color:#000;background-color:#fc0;}

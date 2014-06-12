@@ -1,0 +1,12 @@
+div.ac{display:block;position:absolute;z-index:5;border:1px solid #999;border-top:0;background:#999;}
+div.acHidden{position:absolute;display:none}
+div.acNone{height:1.7em;background:#f8f8f8;color:#ccc;}
+div.acNone div{padding:0.3em 0.5em 0 1em;font-size:0.83em}
+div.acLoading{height:1.7em;color:#ccc;background:#fff url('/i/loading.gif') no-repeat 4px 4px;}
+div.acLoading div{padding:2px 0 0 24px}
+div.ac div.frame{overflow:auto;m_ax-height:12em;border-top:1px solid #eee;background:#fff;}
+div.ac div.list{}
+div.ac div.item{padding:0.3em 0.5em 0.2em 0.5em;margin:0;font-size:0.83em;line-height:1.2em;cursor:pointer;color:#555}
+div.ac div.itemOver{background:#eef;color:#000}
+div.ac div.close{text-align:right;padding:0.2em 0.3em 0.2em 0;color:#fff;font-size:0.69em;line-height:1em;}
+div.ac div.close span{text-decoration:underline;cursor:pointer}

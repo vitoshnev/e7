@@ -1,0 +1,29 @@
+ul.tabs-header{margin:0;padding:0 0 0.2em 0;list-style:none;border-bottom:1px solid #999;}
+ul.tabs-header li{
+	margin:0 1px 0 0;
+	padding:0.2em 1em 0.2em 1em;
+	display:inline;
+	border-left:1px solid #ccc;
+	border-top:1px solid #ccc;
+	border-right:1px solid #999;
+	background-color:#eee;
+	background-image:url("/i/admin.tabs.bg.gif");
+	background-repeat:repeat-x;
+}
+ul.tabs-header li.sel{
+	border-top:1px solid #fc0;
+	border-bottom:1px solid #fff;
+	background-color:#fff;
+	background-image:url("/i/admin.tabs.bg.sel.gif");
+}
+div.tabs-body{
+	width:100%;
+	padding:1em;
+	border:1px solid #ccc;
+	border-top:none;
+	position:relative;
+	top:-1px;
+}
+div.tabs-body div.tab{
+	display:none;
+}

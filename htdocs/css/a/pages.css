@@ -1,0 +1,13 @@
+div.pages{margin:0.5em 0 0.5em 0;}
+div.pages table{border-spacing:0;border-collapse:collapse}
+div.pages table td.title{padding:0 1em 0 0;}
+div.pages table td{padding:0 0.4em 0 0;}
+div.pages a, div.pages a:hover, div.pages a:visited{margin:0;padding:0;}
+div.pages div{padding:0.05em 0.1em 0.05em 0.1em;width:1.8em;text-align:center;background-color:#fff;border:1px solid #ccc;cursor:pointer}
+div.pages div.sel{font-weight:bold;background-color:#fc0;color:#fff;}
+div.pages table.direct{width:100%;margin:0 0 0 0;}
+div.pages table.pos0{margin:0}
+div.pages table.pos1{margin:0}
+div.pages table.direct td{padding:0}
+div.pages table.direct td.prev{text-align:left;}
+div.pages table.direct td.next{text-align:right;}

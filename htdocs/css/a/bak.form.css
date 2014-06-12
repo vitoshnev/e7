@@ -1,0 +1,52 @@
+form{margin:0;padding:0;border:0}
+input{font:1em Arial,Tahoma,Verdana,Arial,Sans-Serif;color:#484848;}
+textarea{font:1em Arial,Tahoma,Verdana,Arial,Sans-Serif;color:#484848;}
+select{font:1em Arial,Tahoma,Verdana,Arial,Sans-Serif;color:#484848;}
+
+/* tables in form */
+form table.form{border-collapse:collapse;border-spacing:0;width:100%;}
+form table.form th{width:12em;text-align:left;padding:0.25em 0.5em 0.25em 0;vertical-align:top;font-weight:normal;}
+form table.form th.nobr{white-space:nowrap;}
+form table.form th.r{font-weight:bold;}
+form table.form th span.star{color:#f60;font-weight:bold;margin-left:0.3em}
+form table.form td{padding:0.25em 0.5em 0.25em 0;vertical-align:top;}
+form table.form td{padding:0.25em 0.5em 0.25em 0;vertical-align:top;}/* for YMaps */
+form table.form tr.continue th{padding:0 0.5em 0.25em 0.5em;border-top:0;}
+form table.form table.YMaps-b-balloon-frame td{padding:0;}
+form table.form label{cursor:pointer;}
+form table.form div.radio{position:relative;}
+form table.form div.radio label{display:block;position:relative;padding:2px 0 0 2em}
+form table.form div.radio input{display:block;position:absolute;left:0;top:0;}
+form table.form tr.err{background-color:#fdd}
+/*form table.form tr.err input{border:1px solid #c00;padding:2px}*/
+form table.form tr.err th{color:#c00}
+form table.form tr.disabled th{color:#aaa}
+form table.form tr.disabled td{color:#aaa}
+form table.form tr.disabled td input{color:#aaa;background-color:#eee;border:1px solid #ccc}
+form table.form table.radios td{padding:0;border:1px solid red}
+form table.form ul.checks{margin:0;padding:0;list-style:none}
+form table.form ul.checks li{margin:0 1em 0 0;padding:0;height:1.5em;width:25em;float:left;overflow:hidden}
+form tr.continue table.form.radios td{padding:0;}
+form div.hint{color:#999;font-size:0.69em;line-height:1.4em;}
+
+form input.l{width:27em}
+form input.m{width:20em}
+form input.s{font-size:1em;width:9.75em}
+form input.ss{font-size:1em;width:4em}
+form input.disabled{color:#aaa;background-color:#eee;border:1px solid #ccc}
+form input.code{width:194px;margin:4px 0 0 0;text-align:center;}
+html>body form input.code{width:196px;}
+form textarea.w{width:95%;height:8em}
+form textarea.l{width:27em;height:8em}
+form textarea.m{width:20em;height:8em;}
+form textarea.s{width:9.75em;font-size:1em;height:10em}
+/*form textarea.w100{width:95%;height:15em}*/
+form select.vs{font-size:0.8em;width:12em}
+form select.l{width:27.25em}
+form select.m{width:20.4em;}
+html>body form select.m{width:20.3em;}
+form select.s{font-size:1em;width:10.2em}
+form input.btn{position:relative;top:1px;height:22px;width:12.65em;padding:0 0.5em 0 0.5em;margin:0;border-left:1px solid #ccd;border-top:1px solid #ccd;border-bottom:1px solid #669;border-right:1px solid #669;color:#006;background:#fff url("/i/a/bg-btn.gif") repeat-x 0 0;font-size:0.8em;cursor:pointer;}
+html>body form .btn{position:normal;top:0;width:12.5em;}
+form input.btnS{height:20px;width:8.5em;padding:0 0.25em 0 0.25em;margin:0;border-left:1px solid #ccd;border-top:1px solid #ccd;border-bottom:1px solid #669;border-right:1px solid #669;color:#006;background:#fff url("/i/a/bg-btn.gif") repeat-x 0 0;font-size:0.7em;cursor:pointer;}
+html>body form .btnS{position:normal;top:0;}
