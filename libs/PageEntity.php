@@ -150,7 +150,7 @@
 				$wherePKS[] = "p.`".$key."`='".s($pkValues[$i++], 1)."'";
 			}
 
-			//print("SELECT * FROM ".$object->tableName()." WHERE ".implode(" AND ", $wherePKS).CTRLF);
+			//print("SELECT * FROM ".$object->tableName()." WHERE ".implode(" AND ", $wherePKS).LF);
 			$object = DB::fetchOne(E7::PAGE_CLASS, "SELECT p.*"
 				.", (SELECT data FROM ".E7::TABLE_PAGE_ACTION_DATA." pad, ".E7::TABLE_PAGE_ACTION_DATA_PAGE." padp WHERE pad.id=padp.dataId AND padp.pageId=p.id) AS actionData"
 				." FROM ".$object->tableName()." p WHERE ".implode(" AND ", $wherePKS)." AND p.isActive");
@@ -274,22 +274,43 @@
 			print "/*last-modified: ".gmdate("D, j M Y G:i:s T", $lastModified)." (".$file.")*/\n";
 			$cssScreen = array_merge($this->css, $this->cssScreen);
 			if ( sizeof($cssScreen) ) {
-				print "@media screen {\n";
+				print "@media screen {";
+				print(self::CSSSeparator());
 				foreach ( $cssScreen as $key => $value ) {
-					print $key."{".$value."}\n";
+					print $key."{".$value."}";
+					print(self::CSSSeparator());
 				}
-				print "}\n";
+				print "}";
+				print(self::CSSSeparator());
+			}
+			// rest medias:
+			if ( sizeof($this->cssMedias) ) {
+				foreach ( $this->cssMedias as $media => $css ) {
+					print "@media ".$media."{";
+					print(self::CSSSeparator());
+					foreach ( $css as $key => $value ) {
+						print $key."{".$value."}";
+						print(self::CSSSeparator());
+					}
+					print "}";
+					print(self::CSSSeparator());
+				}
 			}
 			$cssPrint = array_merge($this->css, $this->cssPrint);
 			if ( sizeof($cssPrint) ) {
-				print "@media print {\n";
+				print "@media print {";
+				print(self::CSSSeparator());
 				foreach ( $cssPrint as $key => $value ) {
-					print $key."{".$value."}\n";
+					print $key."{".$value."}";
+					print(self::CSSSeparator());
 				}
-				print "}\n";
+				print "}";
+				print(self::CSSSeparator());
 			}
 		}
-
+		private static function CSSSeparator(){
+			if(isset($_SERVER['E5_ENV'])) return '/n';
+		}
 		/**
 			Renders JS output.
 			Session is NOT inited by default!
@@ -473,9 +494,12 @@
 			$this->heads["<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"] = true;
 
 			// we always include self-named CSS:
-			$ver = Config::VERSION.".".intval(time()/(Config::INVALIDATE_CSS_MS));
-			$this->cssFiles[get_class($this).".".$ver.".css"] = true;
-
+			$this->cssFiles[get_class($this).".css"] = true;
+			
+			if(!isset($_SERVER['E5_ENV'])) {
+				$this->withSingleCSSFile=true;
+				$this->withSingleJSFile=true;
+			}
 		}
 
 		/**
@@ -574,43 +598,91 @@
 			// CSS
 			if ( $this->cssFiles ) {
 				if ( !is_array($this->cssFiles) ) $this->cssFiles = array($this->cssFiles);
-				foreach ( $this->cssFiles as $file => $isOn ) {
-					if ( !$isOn ) continue;
+				if ( $this->withSingleCSSFile && Config::WITH_SINGLE_CSS) {
+					// оптимизация:
+					$externalCSSFiles = array();
+					$localCSSFiles = array();
+					foreach ( $this->cssFiles as $file => $isOn ) {
+						if ( !$isOn ) continue;
 
-					// add css invalidation:
-					if ( preg_match("/^((http)|(\/)).+/", $file) ) {
-						// absolute or root URL - no invalidation
+						if ( preg_match("/^((http)|(\/)).+/", $file) ) $externalCSSFiles[] = $file;
+						else $localCSSFiles[] = $file;
 					}
-					else {
-						$ver = Config::VERSION.".".intval(time()/(Config::INVALIDATE_CSS_MS));
-						$file = "/css/".substr($file, 0, -4).".".$ver.".css";
-					}
+
+					// внешние CSS-файлы не оптимизируются и они должны идти первыми:
+					foreach ( $externalCSSFiles as $file ) {
+					// continue;
 ?>
 <link rel="stylesheet" href="<?= $file ?>" type="text/css" />
 <?
+					}
+
+					if ( sizeof($localCSSFiles)) {
+
+						$r = Config::VERSION;
+						$singleCSSFile = "/css/single/".base64_encode(implode("\n", $localCSSFiles)).".css?rnd=".$r;
+?>
+<link rel="stylesheet" href="<?= $singleCSSFile ?>" type="text/css" />
+<?
+					}
+				}
+				else{
+					foreach ( $this->cssFiles as $file => $isOn ) {
+						if ( !$isOn ) continue;
+?>
+<link rel="stylesheet" href="<?= preg_match("/^((http)|(\/)).+/", $file)?$file:("/css/".$file) ?>" type="text/css" />
+<?
+					}
 				}
 			}
 
 			if ( $this->isJSRequired ) {
 ?>
 <? ///<noscript><meta http-equiv="refresh" content="0; URL=/no-java-script.html"/></noscript> ?>
-<SCRIPT LANGUAGE="JavaScript">
-<!--
-var onReadys=new Array();
-var d=document;
-//-->
-</SCRIPT>
+<SCRIPT LANGUAGE="JavaScript">var onReadys=new Array();var d=document;</SCRIPT>
 <?
 			}
-
 			// JS
 			if ( $this->jsFiles ) {
 				if ( !is_array($this->jsFiles) ) $this->jsFiles = array($this->jsFiles);
-				foreach ( $this->jsFiles as $file => $isOn ) {
-					if ( !$isOn ) continue;
+
+				if ( $this->isJSRequired ) $this->jsFiles["onReady.js"] = true;
+
+				if ($this->withSingleJSFile && Config::WITH_SINGLE_JS  && !isset($_SERVER['E5_ENV']) ) {
+					// оптимизация:
+
+					$externalJSFiles = array();
+					$localJSFiles = array();
+					foreach ( $this->jsFiles as $file => $isOn ) {
+						if ( !$isOn ) continue;
+
+						if ( preg_match("/^((http)|(\/)).+/", $file) ) $externalJSFiles[] = $file;
+						else $localJSFiles[] = $file;
+					}
+
+					// внешние JS-файлы не оптимизируются и они должны идти первыми:
+					foreach ( $externalJSFiles as $file ) {
+?>
+<script language="javascript" src="<?= $file ?>"></script>
+<?
+					}
+
+					if ( sizeof($localJSFiles) ) {
+						$r = Config::VERSION;
+						$singleJSFile = "/js/single/".base64_encode(implode("\n", $localJSFiles)).".js?rnd=".$r;
+?>
+<script language="javascript" src="<?= $singleJSFile ?>"></script>
+<?
+					}
+				}
+				else {
+					// без оптимизации:
+					foreach ( $this->jsFiles as $file => $isOn ) {
+						if ( !$isOn ) continue;
 ?>
 <script language="javascript" src="<?= preg_match("/^((http)|(\/)).+/", $file)?$file:("/js/".$file) ?>"></script>
 <?
+					}
 				}
 			}
 
@@ -624,17 +696,11 @@ var d=document;
 <?
 				}
 			}
+?>
 
-			if ( $this->isJSRequired ) {
-?>
-<script language="javascript" src="/js/onReady.js"></script>
+<link rel="icon" type="image/png" href="<?= isset($_SERVER['E5_ENV'])?'/dev-favicon.ico':'/favicon.ico' ?>" />
 <?
-			}
-?>
-<? //<link rel="icon" href="/favicon.ico" type="image/x-icon" /> ?>
-<link rel="icon" type="image/png" href="/favicon.png" />
-<link rel="shortcut icon" href="/favicon.ico"><? //for IE ?>
-<?
+//<link rel="shortcut icon" href="/favicon.ico"><? //for IE 
 			foreach ( $this->heads as $item => $isOn ) {
 				if ( $isOn ) print $item."\n";
 			}

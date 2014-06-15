@@ -16,11 +16,13 @@
 		var $pos;		// images always have a position
 		var $name;
 
-		static public function fetchList($page=NULL,$view=NULL) {
-			if(!$view || $view==99) return self::fetchByParent($page->item->id);
+		static public function fetchList($view=NULL) {
+			if(!$view || $view==99) return self::fetchByParent();
 			
 		}
-		public function fetchByParent($parentId){
+		public function fetchByParent(){
+			$page=E7::$actionPageObject;
+			$parentId=$page->item->id;
 			if(!$parentId) return;
 			$tableName=Entity::tableNameForEntity(get_called_class());
 			$sql="SELECT p.id, p.parentId, p.name, p.width, p.height, p.ext, p.pos FROM `".$tableName."` p WHERE p.parentId=".$parentId." ORDER BY pos, createdOn DESC ";
@@ -28,11 +30,12 @@
 			return $items;
 		}
 
-		public static function listView($page=NULL,$view=NULL,$items=NULL,$htmlId=NULL,$allCSS=NULL){
-			if(!$view || $view==99) self::adminImageList($page,$items);
+		public static function viewList($view=NULL,$items=NULL,$htmlId=NULL,$allCSS=NULL){
+			if(!$view || $view==99) self::adminImageList($items);
 		}
-		public static function adminImageList($page,$items){
+		public static function adminImageList($items){
 			if ( !$items ) return;
+			$page=E7::$actionPageObject;
 			$imageEntity=get_called_class();
 ?>
 	<ul class="images">

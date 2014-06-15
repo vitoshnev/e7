@@ -1,22 +1,4 @@
 <?
-	require_once("PublicPage.php");
-
-
-	// require_once("HomeMenu.php");
-	// require_once("HomeMenuImage.php");
-	// require_once("Brand.php");
-	// require_once("BrandImage.php");
-	// require_once("Car.php");
-	// require_once("CarImageSprite.php");
-	// require_once("cookie.php");
-	// require_once("User.php");
-	// require_once("Customer.php");
-	
-	// require_once("Order.php");
-	// require_once("OrderCar.php");
-	// require_once("CarOrder.php");
-
-
 	class HomePage extends PublicPage {
 		var $isHome = true;
 
@@ -31,13 +13,12 @@
 			$this->alterCSS("div#layout", "padding:92px 0 0 0;position:relative;z-index:5;");
 
 			HomeMenu::cssSlides($this);
-			$this->alterCSS("ul#homeMenuImages", "top:0;");
 
+/*
 			$this->css["div#headerCap2"] = "position:absolute;z-index:3;left:0;top:".(HomeMenuImage::FULL_HEIGHT-4)."px;height:4px;width:100%;background:url('/i/banBord.png') repeat-x left bottom;";
 			$this->css["div#homeLayoutInfo"] = "padding:520px 0 0 0";
 
 			$this->css['#homeForm']='postion:relative;background:#fff;width:94%;padding:0 3% 50px;';
-/*
 			$this->css["div#brands li.brand div.carsPad"] = "display:none;position:absolute;top:-4000px;";
 			$this->css["div#brands li.brand.over div.carsPad"] = "top:auto;bottom:100%";
 			$this->css["div#brands ul.cars"] = "width:100%; overflow:hidden; position:absolute; top:40px; left:0;";
@@ -49,7 +30,6 @@
 			$this->css["div#brands ul.cars li.car div.name"] = "font-size:1.5em;line-height:1.1em; font-weight:bold;";
 			$this->css["div#brands ul.cars li.car div.price"] = "font-size:0.83em;color:#fff; margin:0.25em 0 0 0";
 			$this->css["div#brands ul.cars li.car div.price span.value"] = "font-weight:bold; font-size:1.4em";
-*/
 			$this->css["ul.tabs li div.brand"] = "position:relative;height:100%;overflow:hidden;overflow:hidden;";
 			$this->css["ul.tabs li div.brand img"] = "position:relative;width:100%;max-width:".(BrandImage::FULL_WIDTH)."px;display:block;margin:20px auto 0; border-radius:10px; border:0;";
 
@@ -97,15 +77,14 @@
 			$this->css['div#globFrmContainer']='position:relative';
 			$this->css['div#globFrmContainer #globFrmShad']='width:100%;height:100%;background:#b9b9b9;opacity:0.25;position:absolute;left:0;top:0;display:none;';
 			$this->css['div#globFrmContainer #formBysy']='width:100px;height:100px;background:url("/i/busy.gif") center center no-repeat;position:absolute;left:46%;bottom:46%;display:none;';
+*/
 		}
 
 
 		protected function init() {
 			// $this->textKeys[] = "FORM-DESCRIPTION";
 			parent::init();
-
-
-			$this->homeMenus = HomeMenu::fetchSlides();
+			$this->jsFiles["HomeMenu.js"] = true;
 
 		}
 
@@ -135,26 +114,14 @@
 			// Brand::showList();
 			// CarOrder::showOrderForm($this->brands,$this->brandCars,$this->selCarIds,$this->selBrands,$this->texts);
 
-			HomeMenu::showSlides($this->homeMenus, $this);
 		}
 		protected function showBeforeLayoutEnd() {
 			parent::showBeforeLayoutEnd();
-
-		}
-		protected function showRight() {
-			// hide right column
+			HomeMenu::showList($view=2,NULL,'homeMenus'); //show slide content
 		}
 		protected function showAfterLayout(){
 			parent::showAfterLayout();
-
-			HomeMenu::showSlideImages($this->homeMenus, $this);
-?>
-			<div id="headerCap2"></div>
-
-<div id="brandPad"></div>
-
-
-<?
+			HomeMenu::showList($view=1,NULL,'homeMenuImages'); //show slide images
 		}
 	}
 ?>

@@ -60,13 +60,13 @@
 				if(is_array($token)) {
 					list($code, $value) = $token;
 
-					//print "---".token_name($code).":".$value.CTRLF;
+					//print "---".token_name($code).":".$value.LF;
 
 					switch($code) {
 						case T_COMMENT:
 						//case T_DOC_COMMENT: 
 							$comments[] = $value;
-							//print "Comment: ".$value.CTRLF;
+							//print "Comment: ".$value.LF;
 							break;
 
 						case T_FUNCTION:
@@ -82,7 +82,7 @@
 						case T_VARIABLE:
 
 							if ( sizeof($comments) ) {
-								//print token_name($code)." ".$value." has comments:".CTRLF;
+								//print token_name($code)." ".$value." has comments:".LF;
 								//da($comments);
 
 								if ( $code == T_CLASS ) $name = NULL;	// classes do not have names sub array
@@ -143,30 +143,30 @@
 
 			$annotations = array();
 			foreach ( $texts as $text ) {
-				//print "Parsing \"".$text."\"".CTRLF;
+				//print "Parsing \"".$text."\"".LF;
 				
 				if ( preg_match("/^\/\/(.+)$/", $text, $m) ) {
 					// 1
-					//print "Annotation type 1: ".$m[1].CTRLF;
+					//print "Annotation type 1: ".$m[1].LF;
 				}
 				else if ( preg_match("/\/\*(.+)\*\//s", $text, $m) ) {
 					// 2
-					//print "Annotation type 2: ".$m[1].CTRLF;
+					//print "Annotation type 2: ".$m[1].LF;
 				}
 				else if ( false && preg_match("/\/\*\*(.+)\*\//s", $text, $m) ) {
 					// 3
-					//print "Annotation type 3: ".$m[1].CTRLF;
+					//print "Annotation type 3: ".$m[1].LF;
 				}
 				else return array();	// nothing
 
 				$text = $m[1];
 				preg_match("/^\@([A-Z][^\(]+)(\(.+\))?/", trim($text), $m);
 
-				//print "Annotation: ".$m[1].CTRLF;
+				//print "Annotation: ".$m[1].LF;
 				$class = self::$_registeredClasses[$m[1]];
 				if ( !$class ) $class = "Annotation";
 
-				//print "Annotation class: ".$class.CTRLF;
+				//print "Annotation class: ".$class.LF;
 
 				eval("\$a = new ".$class."();");
 				$a->name = $m[1];

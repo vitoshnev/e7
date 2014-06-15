@@ -46,7 +46,7 @@
 
 		public function showBody() {
 			$this->tagMenus();
-			$this->entity->showList($this,99);
+			$this->entity->showList(99);
 			/*
 			
 			*/

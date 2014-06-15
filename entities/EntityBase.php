@@ -27,11 +27,12 @@
 		/**
 			fetch all items
 		*/
-		static public function fetchList($page=NULL,$view=NULL) {
-			if($view===99) return self::fetchAdminList($page);
-			return parent::fetchList($page=NULL,$view=NULL);
+		static public function fetchList($view=NULL) {
+			if($view===99) return self::fetchAdminList();
+			return parent::fetchList($view=NULL);
 		}
-		public function fetchAdminList($page){
+		public function fetchAdminList(){
+			$page=E7::$actionPageObject;
 			if(!$page->page) $page->page=1;
 			$tableName=Entity::tableNameForEntity(get_class($page->entity));
 			if($page->imageEntity){
@@ -60,12 +61,12 @@
 
 			return $items;
 		}
-		public static function listView($page=NULL,$view=NULL,$items=NULL,$htmlId=NULL,$allCSS=NULL){
-
-			return self::showAdminList($page,$view,$items,$htmlId,$allCSS);
-
+		public static function viewList($view=NULL,$items=NULL,$htmlId=NULL,$allCSS=NULL){
+			if($view===99) return self::showAdminList($view,$items,$htmlId,$allCSS);
+			return parent::viewList($view,$items,$htmlId,$allCSS);
 		}
-		static function showAdminList($page=NULL,$view=NULL,$items=NULL,$htmlId=NULL,$allCSS=NULL){
+		static function showAdminList($view=NULL,$items=NULL,$htmlId=NULL,$allCSS=NULL){
+			$page=E7::$actionPageObject;
 			$totalItems=count($items);
 			if ( !$totalItems ) {
 				$page::info("Нет записей");

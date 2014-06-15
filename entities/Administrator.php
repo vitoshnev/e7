@@ -11,7 +11,7 @@
 		var $updatedOn;
 
 		public static function fetchByName($name) {
-			return DB::fetchOne("Administrator", "SELECT * FROM manager WHERE name='".s($name,1)."'");
+			return DB::fetchOne("Administrator", "SELECT * FROM administrator WHERE name='".s($name,1)."'");
 		}
 	}
 ?>

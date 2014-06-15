@@ -77,7 +77,7 @@
 			}
 			$str = (!$skipIndent ? str_repeat("\t", $this->indent) : "").$str;
 			$str = (!$skipTime ? strftime("%d.%m.%Y %H:%M")."\t":"").$str;
-			if ( $this->mode & Logger::MODE_STDOUT ) print ($str.CTRLF);
+			if ( $this->mode & Logger::MODE_STDOUT ) print ($str.LF);
 			if ( $this->mode & Logger::MODE_FILE ) {
 				$fh = @fopen ( $this->fileName, "a" );
 				if ( !$fh ) {

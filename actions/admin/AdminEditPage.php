@@ -239,10 +239,10 @@
 				$itemId=intval($_GET['id']);
 				if ( $itemId ) {
 					// fetch an existing item here for redirect!!
-					eval('$this->item = '.$this->entity.'::fetchItem($this,99,$itemId);');
+					eval('$this->item = '.$this->entity.'::fetchItem(99,$itemId);');
 					if ( !$this->item ) {
 						// item is not found in DB:
-						if ( !$this->urlList ) $this->urlList = "/Admin.html";
+						if ( !$this->urlList ) $this->urlList = "/AdminHomePage.html";
 						$this->urlList = urlRemoveParams($this->urlList, "err");
 						$this->urlList = urlAppendParam($this->urlList, "err", "notFound");
 						errPush("Запись не найдена");
@@ -294,7 +294,7 @@
 			if($this->imageEntitys){
 				$imageEntitys=explode(',',$this->imageEntitys);
 				foreach($imageEntitys as $imageEntity){
-					eval($imageEntity.'::showList($this,99);');
+					eval($imageEntity.'::showList(99);');
 				}
 			}
 			$props = $this->item->properties();

@@ -12,23 +12,25 @@
 		*/
 		protected function doPost() {
 			$_SESSION['AdminLogin'] = $_POST;
+
 			// fetch managers:
 			$manager = Administrator::fetchByName($_POST['login']);
 
 			if ( !$manager ) go("/AdminLogin.html?err=1");
 			if ( $manager->password != $_POST['password'] ) go("/AdminLogin.html?err=2");
 
+			setcookie("AdminLogin", $manager->name, time()+COOKIE_EXPIRY_MEDIUM, "/");
+			$_SESSION[Administrator::SESSION] = serialize($manager);
+			
+			unset($_SESSION['AdminLogin']);
 			// succesful login, should we go to smwhr?
 			if ( $_SESSION['AdminLoginRedirect'] ) {
+				$redirect=$_SESSION['AdminLoginRedirect'];
 				unset($_SESSION['AdminLoginRedirect']);
-				go($_SESSION['AdminLoginRedirect']);
+				go($redirect);
 			}
 
-			setcookie("AdminLogin", $manager->name, time()+COOKIE_EXPIRY_MEDIUM, "/");
-
 			// login manager:
-			unset($_SESSION['AdminLogin']);
-			$_SESSION[Administrator::SESSION] = serialize($manager);
 			go("/AdminHomePage.html", 1);
 		}
 

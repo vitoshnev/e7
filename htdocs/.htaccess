@@ -16,9 +16,15 @@ RewriteEngine On
 # default page: 
 RewriteRule	^\/?$							/E7.php						[QSA,L]
 
-# CSS invalidation:
-RewriteRule ^css/([A-Z].+)\.([\d.]+)\.css$				/css/$1.css?ver=$2				[QSA]
-RewriteRule ^css/a/([A-Z].+)\.([\d.]+)\.css$				/css/a/$1.css?ver=$2				[QSA]
+# single JS access:
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^js\/single\/(.+?)\.js					/E7.php?a=SingleCSSJS&isJS=1&files=$1		[QSA,L]
+
+# single CSS access:
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^css\/single\/(.+?)\.css					/E7.php?a=SingleCSSJS&isCSS=1&files=$1		[QSA,L]
 
 # generic access to Action CSS:
 RewriteCond %{REQUEST_FILENAME} !-f

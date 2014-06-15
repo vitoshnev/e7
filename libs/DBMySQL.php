@@ -65,7 +65,7 @@
 			// store connection:
 			self::$dbConnection = $dbConnection;
 			self::logger()->w("Connected to MySQL database ".$dbConnection->db."@".$dbConnection->host.": ".$dbConnection->link->server_info);
-			//print("DB connection is established, MySQL server: ".$dbConnection->link->server_info.CTRLF);
+			//print("DB connection is established, MySQL server: ".$dbConnection->link->server_info.LF);
 
 			// set client charset:
 			self::setClientCharset($dbConnection->charset);
@@ -248,7 +248,7 @@
 				$wherePKS[] = "`".$key."`='".s($pkValues[$i++], 1)."'";
 			}
 
-			//print("SELECT * FROM ".$object->tableName()." WHERE ".implode(" AND ", $wherePKS).CTRLF);
+			//print("SELECT * FROM ".$object->tableName()." WHERE ".implode(" AND ", $wherePKS).LF);
 			return self::fetchOne($entityName, "SELECT * FROM `".$object->tableName()."` WHERE ".implode(" AND ", $wherePKS));
 		}
 
@@ -257,7 +257,7 @@
 		*/
 		public static function selectOne($q, $dbConnection=NULL) {
 			$dbConnection = self::getConnection($dbConnection);
-			$r = self::q($q, $dbConnection) or err(self::err($dbConnection).CTRLF);
+			$r = self::q($q, $dbConnection) or err(self::err($dbConnection).LF);
 			$item = self::a($r, $dbConnection);
 			return $item;
 		}
@@ -267,7 +267,7 @@
 		*/
 		public static function select($q, $dbConnection=NULL) {
 			$dbConnection = self::getConnection($dbConnection);
-			$r = self::q($q, $dbConnection) or err(self::err($dbConnection).CTRLF);
+			$r = self::q($q, $dbConnection) or err(self::err($dbConnection).LF);
 			$items = array();
 			while ( $item = self::a($r, $dbConnection) ) $items[] = $item;
 			return $items;
@@ -298,7 +298,7 @@
 		public static function err($dbConnection=NULL) {
 			$dbConnection = self::getConnection($dbConnection);
 			//da(self::$log);
-			if ( self::$lastQ ) return $dbConnection->link->error.CTRLF."<p class='msg2'>".self::$lastQ.";</p>";
+			if ( self::$lastQ ) return $dbConnection->link->error.LF."<p class='msg2'>".self::$lastQ.";</p>";
 			return $dbConnection->link->error;
 		}
 

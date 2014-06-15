@@ -83,6 +83,9 @@
 		public static $os				= "Unknown";
 		public static $osPathDelimiter	= ":";
 		public static $isUnderWindows	= false;
+		
+		//for calling in any of code
+		public static $actionPageObject		= false;
 
 		// request params:
 		public static $languageId;
@@ -123,8 +126,12 @@
 			
 			// set timezone:
 			if ( constant("Config::TIMEZONE") ) date_default_timezone_set(Config::TIMEZONE);
-		}
 
+			
+		}
+		static function actionPage(){
+			return $this;
+		}
 		/**
 			Language selection.
 		*/
@@ -174,6 +181,7 @@
 						return;
 					}
 
+					E7::$actionPageObject=$page;
 					// show home page and exit:
 					E7::showPage($page);
 					return;
@@ -196,6 +204,7 @@
 						return;
 					}
 
+					E7::$actionPageObject=$page;
 					// show page and exit:
 					E7::showPage($page);
 					return;
@@ -245,6 +254,7 @@
 				// is it JSON request?
 				else if ( isset($_GET[self::PARAM_JSON]) ) E7::showPage($pageObject, "JSON");
 				else {
+					E7::$actionPageObject=$pageObject;
 					// show HTML page:
 					E7::showPage($pageObject);
 				}

@@ -35,8 +35,8 @@
 		public static function pages ( $total, $per_page, $page, $url=NULL, $pos=0, $pageParam="page" ) {
 			if ( $url == NULL ) $url = $_SERVER['REQUEST_URI'];//.$_SERVER['QUERY_STRING'];
 			//da($_SERVER);
-			//print $_SERVER['REQUEST_URI'].CTRLF;
-			//print $url.CTRLF;
+			//print $_SERVER['REQUEST_URI'].LF;
+			//print $url.LF;
 			if ( preg_match("/^(.+?)\/(".$pageParam."-\d+\.html)?(\?.*?)?(#.+)?$/", $url) ) {
 				// URL format: /**/page-<pageNum>.html
 				$urlFirstPage = preg_replace("/^(.+?)\/(".$pageParam."-\d+\.html)?(\?.*?)?(#.+)?$/", "$1/$3$4", $url);

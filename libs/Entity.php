@@ -191,7 +191,7 @@
 			// is it a public property?
 			if ( !in_array($key, $props) || $FK ) {
 				// store it in data:
-				//print "to data".CTRLF;
+				//print "to data".LF;
 				$this->_data[$key] = $value;
 				return;
 			}
@@ -1374,24 +1374,24 @@
 			Fetches a list of items of this entity.
 			Should always be overriden.
 		*/
-		public static function fetchList($page=NULL,$view=0) {
+		public static function fetchList($view=0) {
 			$items=self::fetch('SELECT name, id FROM '.self::tableNameForEntity(get_called_class()).' WHERE isActive ORDER BY name');
 			// print_r($items);
 			return $items;
 
 		}
 
-		public static function showList($page=NULL,$view=0, $items=NULL, $id=NULL, $css=NULL) {
-			if ( !$items ) eval("\$items = ".get_called_class()."::fetchList(\$page,\$view,\$id);");
+		public static function showList($view=0, $items=NULL, $htmlId=NULL, $css=NULL) {
+			if ( !$items ) eval("\$items = ".get_called_class()."::fetchList(\$view);");
 
-			if ( !$id ) eval("\$id = ".get_called_class()."::htmlListId(\$view);");
+			if ( !$htmlId ) eval("\$htmlId = ".get_called_class()."::htmlListId(\$view);");
 			$allCSS = array();
 			$item = Entity::item(get_called_class());
 			if ( $item->annotation("WithListViewCSS") ) $allCSS[] = "view".$view;
 			if ( !$css ) eval("\$css = ".get_called_class()."::htmlListCSS(\$view);");
 			if ( $css ) $allCSS[] = $css;
 
-			eval(get_called_class()."::listView(\$page,\$view,\$items,\$htmlId,\$allCSS);");
+			eval(get_called_class()."::viewList(\$view,\$items,\$htmlId,\$allCSS);");
 
 
 		}
@@ -1399,13 +1399,21 @@
 			this is accessory method for override list. (maybe, it will be <table>)
 			This is only one static view method, cose we work with array objects, all other view methods must be public
 		*/
-		public static function listView($page=NULL,$view=NULL,$items=NULL,$htmlId=NULL,$allCSS=NULL){
+		public static function viewList($view=NULL,$items=NULL,$htmlId=NULL,$allCSS=NULL){
 			if(!$items) return;
 ?>
-	<ul<?= ($id?" id='".$id."'":"").(sizeof($allCSS)>0?" class='".implode(" ", $allCSS)."'":"") ?>>
+	<ul<?= ($htmlId?" id='".$htmlId."'":"").(sizeof($allCSS)>0?" class='".implode(" ", $allCSS)."'":"") ?>>
 <?
-			foreach ( $items as $item ) {
-				$item->listItemView($page,$view);
+			$i=0;
+			$count=count($items);
+			foreach ( $items as $item ){
+				$css=array();
+				if($i==0) $css[]='first';
+				else if($i==$count) $css[]='last';
+				if($i%2==0) $css[]='even';
+				
+				$item->viewListItem($view,$i,$css);
+				$i++;
 			}
 ?>
 	</ul>
@@ -1460,17 +1468,17 @@
 		/**
 			Make <li> for list
 		*/
-		public function listItemView($page=NULL,$view=0, $id=NULL, $css=NULL) {
-			$id = $id ? $id : $this->htmlListItemId($view);
-			$css = $css ? $css : $this->htmlListItemCSS($view);
+		public function viewListItem($view=0,$i=NULL,$css=NULL) {
+			//$id = $id ? $id : $this->htmlListItemId($view);  /// this is List HOW it can be with similar ID?
+			// $css = $css ? $css : $this->htmlListItemCSS($view);
 
 			$allCSS = array();
+			if ( $css ) $allCSS = $css;
 			if ( $this->annotation("WithListItemViewCSS") ) $allCSS[] = "view".$view;
-			if ( $css ) $allCSS[] = $css;
 ?>
 <li<?= ($id?" id='".$id."'":"").(sizeof($allCSS)>0?" class='".implode(" ", $allCSS)."'":"") ?>>
 <?
-			self::showItem($page=NULL,$this,$view);
+			$this->viewItem($view,$i);
 ?>
 </li>
 <?
@@ -1478,19 +1486,19 @@
 		/**
 			this is static method, cose we can use it with out object. fetch and create object can be inside
 		*/
-		public static function showItem($page=NULL,$item=NULL,$itemId=NULL,$view=0) {
-			if ( !$item ) eval("\$item = ".get_called_class()."::fetchItem(\$page,\$view,\$itemId);");
-			$item->itemView($page,$view);
+		public static function showItem($item=NULL,$itemId=NULL,$view=0) {
+			if ( !$item ) eval("\$item = ".get_called_class()."::fetchItem(\$view,\$itemId);");
+			$item->viewItem($view);
 		}
 
-		public function itemView($page=NULL,$view=NULL){
+		public function viewItem($view=NULL,$i=NULL){
 			print $this->toString();
 		
 		}
 		/**
 			must return object
 		*/
-		public static function fetchItem($page=NULL,$view=NULL,$id=NULL){
+		public static function fetchItem($view=NULL,$id=NULL){
 			if ( !intval($id) ) return NULL;
 			$code = "\$item = DB::fetchById('".get_called_class()."', '".intval($id)."');";
 			eval($code);
